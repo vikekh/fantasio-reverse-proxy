@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  bazarr:
+    image: caddy
+    volumes:
+      - ./.caddy/site:/usr/share/caddy
+      - ./.caddy/data:/data
+      - ./.caddy/config:/config
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
