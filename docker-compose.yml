@@ -1,14 +1,27 @@
 version: "3.7"
 
 services:
-  bazarr:
-    image: caddy
-    volumes:
-      - ./.caddy/site:/usr/share/caddy
-      - ./.caddy/data:/data
-      - ./.caddy/config:/config
-      - ./.caddy/Caddyfile:/etc/caddy/Caddyfile
+  nginx-proxy:
+    image: jwilder/nginx-proxy
     ports:
-      - 80:80
-      - 443:443
-    restart: unless-stopped
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./.nginx/certs:/etc/nginx/certs
+      - ./.nginx/vhost.d:/etc/nginx/vhost.d
+      - ./.nginx/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  certbot:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    environment:
+      #- DEFAULT_EMAIL=
+    volumes:
+      - ./.nginx/certs:/etc/nginx/certs
+      - ./.nginx/vhost.d:/etc/nginx/vhost.d
+      - ./.nginx/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
