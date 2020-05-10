@@ -11,7 +11,7 @@ services:
       - ./.nginx/vhost.d:/etc/nginx/vhost.d
       - ./.nginx/html:/usr/share/nginx/html
       - /var/run/docker.sock:/tmp/docker.sock:ro
-  certbot:
+  letsencrypt-nginx-proxy-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
     environment:
       #- DEFAULT_EMAIL=
