@@ -13,8 +13,8 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
   letsencrypt-nginx-proxy-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
-    #environment:
-      #- DEFAULT_EMAIL=
+    environment:
+      - DEFAULT_EMAIL=${DEFAULT_EMAIL}
     volumes:
       - ./.nginx/certs:/etc/nginx/certs
       - ./.nginx/vhost.d:/etc/nginx/vhost.d
