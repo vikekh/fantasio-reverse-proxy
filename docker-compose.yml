@@ -1,8 +1,9 @@
 version: "3.7"
 
 services:
-  bazarr:
+  caddy:
     image: caddy
+    container_name: caddy
     volumes:
       - ./.caddy/site:/usr/share/caddy
       - ./.caddy/data:/data
@@ -10,5 +11,14 @@ services:
       - ./.caddy/Caddyfile:/etc/caddy/Caddyfile
     ports:
       - 80:80
-      - 443:443
+        #- 443:443
+    networks:
+      - media_default
+      - torrent_default
     restart: unless-stopped
+
+networks:
+  media_default:
+    external: true
+  torrent_default:
+    external: true
