@@ -5,10 +5,9 @@ services:
     image: caddy
     container_name: caddy
     volumes:
-      - ./.caddy/site:/usr/share/caddy
-      - ./.caddy/data:/data
-      - ./.caddy/config:/config
-      - ./.caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy-config:/config
+      - caddy-data:/data
     ports:
       - 80:80
       - 443:443
@@ -16,6 +15,12 @@ services:
       - reverse-proxy
     restart: unless-stopped
 
+volumes:
+  caddy-config:
+    name: caddy-config
+  caddy-data:
+    name: caddy-data
+
 networks:
   reverse-proxy:
-    external: true
+    name: reverse-proxy
