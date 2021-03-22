@@ -5,7 +5,7 @@ services:
     image: caddy
     container_name: caddy
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./.caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy-config:/config
       - caddy-data:/data
     ports:
