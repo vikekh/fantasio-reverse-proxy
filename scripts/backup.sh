@@ -15,7 +15,7 @@ mkdir $BACKUP_DIR
 
 docker stop caddy
 
-docker run --rm -v caddy-config:/data -v $BACKUP_DIR:/backup ubuntu tar czvf /backup/caddy-config.tar.gz /data
-docker run --rm -v caddy-data:/data -v $BACKUP_DIR:/backup ubuntu tar czvf /backup/caddy-data.tar.gz /data
+docker run --rm -v caddy-config:/data -v $BACKUP_DIR:/backup ubuntu tar cvf /backup/caddy-config.tar /data
+docker run --rm -v caddy-data:/data -v $BACKUP_DIR:/backup ubuntu tar cvf /backup/caddy-data.tar /data
 
 docker start caddy
